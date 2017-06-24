@@ -1,6 +1,9 @@
+//Load config
+var config    = require("./config");
+
+
 var passport  = require('passport');
 var Strategy  = require('passport-twitter').Strategy;
-var config    = require(config);
 
 passport.use(new Strategy({
     consumerKey: process.env.CONSUMER_KEY,
