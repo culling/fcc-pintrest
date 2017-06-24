@@ -11,7 +11,7 @@ var express     = require("express");
 var socketio    = require('socket.io');
 var cookieParser    = require('cookie-parser');
 var expressSession  = require('express-session');
-var flash       = require("connect-flash");
+
 
 
 //Express App
@@ -50,12 +50,12 @@ module.exports  = function(){
     //Passport
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(flash());
+    //app.use(flash());
 
 
     //Views
-    app.set("views", "./app/views");
-    app.set("view engine", "ejs");
+    //app.set("views", "./app/views");
+    //app.set("view engine", "ejs");
 
     //Routes
     var api = require("./../app/routes/api.route.server");
