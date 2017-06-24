@@ -45,7 +45,7 @@ module.exports  = function(){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(cookieParser());
-    app.use(expressSession({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+    app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
     //Passport
     app.use(passport.initialize());

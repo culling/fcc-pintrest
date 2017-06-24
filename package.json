@@ -10,7 +10,7 @@
     "vsc-config-mongo": "mkdir data && echo 'mongod --bind_ip=$IP --dbpath=data --nojournal --rest \"$@\"'",
     "vsc-run-mongo": "mongod --port 27017 --dbpath=./data",
     "vsc-mongo": "npm run vsc-run-mongo",
-    "heroku-create-app":"heroku login && heroku create",
+    "heroku-create-app": "heroku login && heroku create",
     "heroku-config-mongo": "heroku addons:create mongolab:sandbox",
     "heroku-push": "git push heroku master",
     "dev-fe": "./node_modules/.bin/webpack -d --watch",
@@ -18,8 +18,8 @@
   },
   "author": "Gene Culling",
   "license": "ISC",
-  "engines":{
-      "node": "6.9.3"      
+  "engines": {
+    "node": "6.9.3"
   },
   "dependencies": {
     "babel-core": "^6.25.0",
@@ -36,6 +36,7 @@
     "mongoose": "^4.10.6",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "socket.io": "^2.0.3",
