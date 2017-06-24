@@ -13,6 +13,7 @@
     "heroku-create-app": "heroku login && heroku create",
     "heroku-config-mongo": "heroku addons:create mongolab:sandbox",
     "heroku-push": "git push heroku master",
+    "heroku-dev": "nf start -f Procfile_dev",
     "dev-fe": "./node_modules/.bin/webpack -d --watch",
     "dev-be": "nodemon ./server.js"
   },
@@ -42,5 +43,9 @@
     "react-dom": "^15.6.1",
     "socket.io": "^2.0.3",
     "webpack": "^2.6.1"
+  },
+  "devDependencies": {
+    "foreman": "^2.0.0",
+    "nodemon": "^1.11.0"
   }
 }
