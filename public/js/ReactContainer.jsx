@@ -1,10 +1,11 @@
 // References and useful pages
 //https://stackoverflow.com/questions/41216948/this-setstate-is-not-a-function-when-trying-to-save-response-on-state
 
- 
 import React from 'react';
 import {render} from 'react-dom';
 
+//Navbars
+import PrimaryNavbar    from './Navbars/PrimaryNavbar.jsx';
 
 
 class ReactContainer extends React.Component{
@@ -15,7 +16,6 @@ class ReactContainer extends React.Component{
         this.state = {
             activeContainer: "#home-panel"
         }
-
         //Binding to this for functions
 
     };
@@ -25,18 +25,34 @@ class ReactContainer extends React.Component{
             console.log("new state found");
             //this.setState(newState);
         }.bind(this));
-
+        this._getUser.bind(this);
+        this._getUser();
     }
 
-
+    _getUser(){
+        //User
+        jQuery.ajax({
+            method: 'GET',
+            url:"/api/user",
+            success: (user)=>{
+                this.setState({ user: user });
+            },
+            contentType : "application/json",
+            dataType: "JSON"
+        });
+    };
 
 
     render(){
         return(
 
             <div>
-                My Pintrest Clone
-
+                <b>My Pintrest Clone</b>
+                <PrimaryNavbar />
+                {this.state.user &&
+                    <div>Welcome {this.state.user.displayName}
+                    </div>
+                }
             </div>
         )
     }
