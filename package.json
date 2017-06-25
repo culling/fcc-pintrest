@@ -15,7 +15,8 @@
     "heroku-push": "git push heroku master",
     "heroku-dev": "nf start -f Procfile_dev",
     "dev-fe": "./node_modules/.bin/webpack -d --watch",
-    "dev-be": "nodemon ./server.js"
+    "dev-be": "nodemon ./server.js",
+    "github-push": "git push origin master"
   },
   "author": "Gene Culling",
   "license": "ISC",
