@@ -21,36 +21,21 @@ function clean(obj){
     }
 }
 
-function combine(refObj, addObj, done ){
-    for (var propName in addObj){
-        if(refObj[propName] === null || refObj[propName] === undefined || refObj[propName] === "" ){
-            refObj[propName] = addObj[propName];
-        }
-    }
-    done(refObj);
-}
-
-
 router.get("/", function(req, res){
     res.sendFile(("apiguide.html"), {root: "public"});
 });
 
+router.get("/twitter/user", function(req, res){
+    res.write(JSON.stringify( req.user || {}, null, "\t"));
+    res.end();
+});
+
 router.get("/user", function(req, res){
-    var user = req.user || {};
-        console.log("user:")
-        console.log( user );
-
-    users.getUserByUsername(user.username, function(userFromDB){
-//        console.log("User from DB");
-//        console.log(userFromDB);
-        user = combine(user, userFromDB, function(combinedUser){
-//            console.log("combined User");
-//            console.log(combinedUser);
-            res.write(JSON.stringify(combinedUser, null, "\t")  );
-            res.end();
-        });
+    var currentUser = req.user || {};
+    users.getUserByUsername(currentUser.username, function(userFromDB){
+        res.write(JSON.stringify(userFromDB, null, "\t")  );
+        res.end();
     });
-
 });
 
 router.get("/users", function(req, res){
@@ -59,14 +44,13 @@ router.get("/users", function(req, res){
         res.write(JSON.stringify( users, null, "\t"));
         res.end();
     })
-})
+});
 
 router.get("/users/drop", function(req, res){
     users.drop(function(){
         res.write("dropped");
         res.end();
     });
-
-})
+});
 
 module.exports = router;

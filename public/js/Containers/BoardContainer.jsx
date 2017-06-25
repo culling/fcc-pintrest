@@ -4,46 +4,39 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-
-
-class HomeContainer extends React.Component{
+class BoardContainer extends React.Component{
 
     constructor(props){
         super(props);
-
         this.state = {
-            activeContainer: "#home-container"
+            user:       this.props.user,
+            boardOwner: this.props.boardOwner
         }
-
     };
 
     componentWillMount(){
-
         socket.on('new state', function(newState) {
             console.log("new state found");
             //this.setState(newState);
-
         }.bind(this));
    }
 
- 
-
     render(){
         return(
-            <div id="home-container" className="home-container">
-                <b>Home </b>
-                {(this.props.user) &&
-                <div id="welcome-message">
-                    
-                    Welcome {this.props.user.displayName} 
-                    <img className="circle" src={this.props.twitterUser.profile_image_url_https} />
-                    
-                </div>
+            <div id="board-container">
+                <b>Board</b>
+                {this.props.user && 
+                    <div>Logged in Username: {this.props.user.username}</div>
                 }
+                
+                {this.props.boardOwner &&
+                    <div>Board Owner: {this.props.boardOwner.username}</div>
+                }
+                
             </div>
         )
     }
 }
 
 
-export default HomeContainer;
+export default BoardContainer;

@@ -9,26 +9,29 @@ class PrimaryNavbar extends React.Component{
         this.state = {
             containerIds:[
                 "#home-container",
-                "#profile-container"
-            ]
+                "#profile-container",
+                "#myBoard-container"
+            ],
+            activeContainerId: "initial"
         }
     }
 
     componentWillMount(){
         jQuery( document ).ready(function(){
             jQuery(".button-collapse").sideNav();
-        })
+        });
+        this._showContainer("#home-container");
     }
 
     _showContainer(newActiveContainerId){
         if(this.state.activeContainerId != newActiveContainerId){
-        this.setState({activeContainerId: newActiveContainerId});
-        this.state.containerIds.filter(containerId =>{
-            return containerId !== newActiveContainerId
-        }).map(containerId =>{
-            jQuery(containerId)
-                .attr("class", "div-hidden");
-        });
+            this.setState({activeContainerId: newActiveContainerId});
+            this.state.containerIds.filter(containerId =>{
+                return containerId !== newActiveContainerId
+            }).map(containerId =>{
+                jQuery(containerId)
+                    .attr("class", "div-hidden");
+            });
         //Show active container
         jQuery(newActiveContainerId)
             .attr("class", "div-visible");
@@ -44,7 +47,6 @@ class PrimaryNavbar extends React.Component{
     _profileClicked(){
         console.log("profile Clicked");
         this._showContainer("#profile-container");
-
     }
 
     _loginClicked(){
@@ -52,6 +54,14 @@ class PrimaryNavbar extends React.Component{
         //this._hideAllContainers();
     }
 
+    _logoutClicked(){
+        console.log("logout Clicked");
+    }
+
+    _myBoardClicked(){
+        console.log("My Board Clicked");
+        this._showContainer("#myBoard-container");
+    }
 
     render(){
         return(
@@ -62,12 +72,18 @@ class PrimaryNavbar extends React.Component{
                         <ul className="right hide-on-med-and-down">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
                             <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>                            
+                            <li  onClick={ this._myBoardClicked.bind(this)}><a >My Board</a></li>
+
                             <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter">Log In</a></li>
+                            <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>
+
                         </ul>
                         <ul className="side-nav" id="mobile-menu">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
                             <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>
                             <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter" >Log In</a></li>
+                            <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>
+
                         </ul>
                     </div>
                 </nav>

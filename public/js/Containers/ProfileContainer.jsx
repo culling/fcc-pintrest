@@ -6,14 +6,10 @@ import {render} from 'react-dom';
 
 
 
-class HomeContainer extends React.Component{
+class ProfileContainer extends React.Component{
 
     constructor(props){
         super(props);
-
-        this.state = {
-            activeContainer: "#home-container"
-        }
 
     };
 
@@ -26,18 +22,14 @@ class HomeContainer extends React.Component{
         }.bind(this));
    }
 
- 
-
     render(){
         return(
-            <div id="home-container" className="home-container">
-                <b>Home </b>
+            <div id="profile-container" className="div-hidden">
+                <b>Profile</b>
                 {(this.props.user) &&
-                <div id="welcome-message">
-                    
-                    Welcome {this.props.user.displayName} 
+                <div id="profile-header">
+                    {this.props.user.displayName} 
                     <img className="circle" src={this.props.twitterUser.profile_image_url_https} />
-                    
                 </div>
                 }
             </div>
@@ -46,4 +38,4 @@ class HomeContainer extends React.Component{
 }
 
 
-export default HomeContainer;
+export default ProfileContainer;

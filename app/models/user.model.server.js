@@ -27,7 +27,7 @@ var UserSchema = new Schema({
     twitterId           : String,
     username            : String,
     displayName         : String,
-
+    profileImageUrl     : String,
     email               : String,
 
     messages            : Array

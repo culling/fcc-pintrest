@@ -9,6 +9,9 @@ import PrimaryNavbar    from './Navbars/PrimaryNavbar.jsx';
 
 //Containers
 import HomeContainer    from "./Containers/HomeContainer.jsx";
+import ProfileContainer from "./Containers/ProfileContainer.jsx";
+import BoardContainer   from "./Containers/BoardContainer.jsx";
+
 
 class ReactContainer extends React.Component{
 
@@ -29,6 +32,8 @@ class ReactContainer extends React.Component{
         }.bind(this));
         this._getUser.bind(this);
         this._getUser();
+        this._getTwitterUser.bind(this);
+        this._getTwitterUser();
     }
 
     _getUser(){
@@ -43,7 +48,18 @@ class ReactContainer extends React.Component{
             dataType: "JSON"
         });
     };
-
+    _getTwitterUser(){
+        //Twitter User
+        jQuery.ajax({
+            method: 'GET',
+            url:"/api/twitter/user",
+            success: (twitterUser)=>{
+                this.setState({ twitterUser: twitterUser._json });
+            },
+            contentType : "application/json",
+            dataType: "JSON"
+        });
+    };
 
     render(){
         return(
@@ -56,7 +72,14 @@ class ReactContainer extends React.Component{
                         <b>Current User {this.state.user.displayName}</b>
                     </div>
                 }
-                <HomeContainer user={this.state.user} />
+                <HomeContainer      user={this.state.user} twitterUser={this.state.twitterUser} />
+                <ProfileContainer   user={this.state.user} twitterUser={this.state.twitterUser} />
+                <div id="myBoard-container" className="div-hidden">
+                    <BoardContainer     user={this.state.user} boardOwner={this.state.user} />
+                </div>
+                <div id="allBoard-container" className="div-hidden">
+                    <BoardContainer     user={this.state.user} boardOwner={{username:null}} />                    
+                </div>
             </div>
         )
     }

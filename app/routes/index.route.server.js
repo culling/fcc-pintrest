@@ -17,10 +17,15 @@ var http = require("http");
 router.get('/login/twitter', passport.authenticate('twitter'));
 
 router.get('/login/twitter/return', 
-    passport.authenticate('twitter', { failureRedirect: '/' }),
-    function(req, res) {
+  passport.authenticate('twitter', { failureRedirect: '/' }),
+  function(req, res) {
     res.redirect('/');
-  });
+});
+
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
 
 
 module.exports = router;
