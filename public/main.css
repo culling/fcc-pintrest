@@ -1,3 +1,10 @@
+.div-visible {
+  visibility: visible; }
+
+.div-hidden {
+  visibility: hidden;
+  display: none; }
+
 nav{
   background-color: hsl(190, 50%, 50%)
 }

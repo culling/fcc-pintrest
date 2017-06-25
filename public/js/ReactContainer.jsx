@@ -7,6 +7,8 @@ import {render} from 'react-dom';
 //Navbars
 import PrimaryNavbar    from './Navbars/PrimaryNavbar.jsx';
 
+//Containers
+import HomeContainer    from "./Containers/HomeContainer.jsx";
 
 class ReactContainer extends React.Component{
 
@@ -50,9 +52,11 @@ class ReactContainer extends React.Component{
                 <b>My Pintrest Clone</b>
                 <PrimaryNavbar />
                 {this.state.user &&
-                    <div>Welcome {this.state.user.displayName}
+                    <div>
+                        <b>Current User {this.state.user.displayName}</b>
                     </div>
                 }
+                <HomeContainer user={this.state.user} />
             </div>
         )
     }
