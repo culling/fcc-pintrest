@@ -20,13 +20,14 @@ function clean(obj){
         }
     }
 }
-function combine(refObj, addObj){
+
+function combine(refObj, addObj, done ){
     for (var propName in addObj){
         if(refObj[propName] === null || refObj[propName] === undefined || refObj[propName] === "" ){
             refObj[propName] = addObj[propName];
         }
     }
-    return refObj;
+    done(refObj);
 }
 
 
@@ -36,11 +37,18 @@ router.get("/", function(req, res){
 
 router.get("/user", function(req, res){
     var user = req.user || {};
-    users.getUserByUsername(user.username, function(userFromDB){
+        console.log("user:")
         console.log( user );
-        user = combine(user, userFromDB);
-        res.write(JSON.stringify(user, null, "\t")  );
-        res.end();
+
+    users.getUserByUsername(user.username, function(userFromDB){
+//        console.log("User from DB");
+//        console.log(userFromDB);
+        user = combine(user, userFromDB, function(combinedUser){
+//            console.log("combined User");
+//            console.log(combinedUser);
+            res.write(JSON.stringify(combinedUser, null, "\t")  );
+            res.end();
+        });
     });
 
 });
