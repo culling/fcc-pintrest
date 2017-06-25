@@ -18,11 +18,12 @@ class HomeContainer extends React.Component{
     };
 
     componentWillMount(){
+
         socket.on('new state', function(newState) {
             console.log("new state found");
             //this.setState(newState);
+
         }.bind(this));
- 
    }
 
  
@@ -31,9 +32,11 @@ class HomeContainer extends React.Component{
         return(
             <div id="home-container" className="home-container">
                 Home Container
-                {this.props.user &&
+                {(this.props.user) &&
                 <div id="welcome-message">
+                    
                     Welcome {this.props.user.displayName}
+
                 </div>
                 }
             </div>

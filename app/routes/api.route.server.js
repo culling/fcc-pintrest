@@ -20,6 +20,15 @@ function clean(obj){
         }
     }
 }
+function combine(refObj, addObj){
+    for (var propName in addObj){
+        if(refObj[propName] === null || refObj[propName] === undefined || refObj[propName] === "" ){
+            refObj[propName] = addObj[propName];
+        }
+    }
+    return refObj;
+}
+
 
 router.get("/", function(req, res){
     res.sendFile(("apiguide.html"), {root: "public"});
@@ -27,9 +36,14 @@ router.get("/", function(req, res){
 
 router.get("/user", function(req, res){
     var user = req.user || {};
-    res.write(JSON.stringify(user, null, "\t")  );
-    res.end();
-})
+    users.getUserByUsername(user.username, function(userFromDB){
+        console.log( user );
+        user = combine(user, userFromDB);
+        res.write(JSON.stringify(user, null, "\t")  );
+        res.end();
+    });
+
+});
 
 router.get("/users", function(req, res){
     users.findAll(function(users){

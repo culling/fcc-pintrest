@@ -38,6 +38,8 @@ var UserSchema = new Schema({
 var UserModel       = mongoose.model('User', UserSchema );
 exports.UserModel   = UserModel;
 
+
+/*
 exports.findByUsername = function(username, cb){
     UserModel.find({"username": username},{"password": 0, "salt":0}, function(err, foundUsers){
         if(err){
@@ -56,7 +58,6 @@ exports.create  = function(user){
     newUser.save();
 };
 
-
 exports.findAll = function(cb){
     UserModel.find()
     .exec(
@@ -66,3 +67,4 @@ exports.findAll = function(cb){
         }
     );
 };
+*/

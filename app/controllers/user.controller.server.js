@@ -7,6 +7,16 @@ var mongoExport = require("./../../config/mongo");
 
 var UserModel   = mongoExport.users.UserModel;
 var Users       = mongoExport.users;
+
+function clean(obj){
+    for (var propName in obj){
+        if(obj[propName] === null || obj[propName] === undefined || obj[propName] === "" ){
+            delete obj[propName];
+        }
+    }
+}
+
+
 exports.findAll = function (done){
     UserModel.find({},function(err, foundUsers){
         if(err){ console.error(err)};
@@ -16,4 +26,11 @@ exports.findAll = function (done){
 
 exports.drop = function(done){
     UserModel.collection.drop(done());
+}
+
+exports.getUserByUsername = function(username, done){
+    UserModel.findOne({"username":username}, {"password": 0, "salt":0}, function(err, user){
+        if(err){console.error(err)};
+        done(user);
+    });
 }
