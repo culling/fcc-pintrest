@@ -6,5 +6,7 @@
   display: none; }
 
 nav{
-  background-color: hsl(190, 50%, 50%)
+  background-color: hsl(190, 50%, 50%);
+
+  border-radius: 1em;
 }

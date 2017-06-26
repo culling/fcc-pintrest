@@ -65,21 +65,26 @@ class ReactContainer extends React.Component{
         return(
 
             <div>
+                <header>
                 <b>My Pintrest Clone</b>
                 <PrimaryNavbar />
-                {this.state.user &&
-                    <div>
-                        <b>Current User {this.state.user.displayName}</b>
+                    {this.state.user &&
+                        <div>
+                            <b>Current User {this.state.user.displayName}</b>
+                        </div>
+                    }
+                </header>
+
+                    <HomeContainer          user={this.state.user} twitterUser={this.state.twitterUser} />
+                    <ProfileContainer       user={this.state.user} twitterUser={this.state.twitterUser} />
+                    <div id="myBoard-container" className="div-hidden">
+                        <BoardContainer     user={this.state.user} filterUser={this.state.user} />
                     </div>
-                }
-                <HomeContainer      user={this.state.user} twitterUser={this.state.twitterUser} />
-                <ProfileContainer   user={this.state.user} twitterUser={this.state.twitterUser} />
-                <div id="myBoard-container" className="div-hidden">
-                    <BoardContainer     user={this.state.user} boardOwner={this.state.user} />
-                </div>
-                <div id="allBoard-container" className="div-hidden">
-                    <BoardContainer     user={this.state.user} boardOwner={{username:null}} />                    
-                </div>
+                    <div id="allBoard-container" className="div-hidden">
+                        <BoardContainer     user={this.state.user}  filterUser={{username:null, type:"all"}}/>
+                    </div>
+
+
             </div>
         )
     }

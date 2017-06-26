@@ -24,6 +24,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
+    postHeading : String,
     refUrl      : String,
     likes       : Array,
     favorites   : Array,

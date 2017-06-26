@@ -58,6 +58,9 @@ module.exports  = function(){
     //app.set("view engine", "ejs");
 
     //Routes
+    var post = require("./../app/routes/post.route.server");
+    app.use("/api/post", post);
+
     var api = require("./../app/routes/api.route.server");
     app.use("/api", api);
 
