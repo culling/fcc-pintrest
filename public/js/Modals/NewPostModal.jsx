@@ -44,7 +44,7 @@ class NewPostModal extends React.Component{
             },
             dataType: "text",
             contentType : "application/json"
-        });        
+        });
 
 
     }

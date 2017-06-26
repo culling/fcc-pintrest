@@ -28,6 +28,11 @@ class BoardContainer extends React.Component{
             //this.setState(newState);
         }.bind(this));
         this._getPosts(this.props.filterUser || this.props.user);
+        jQuery('.grid').masonry({
+            // options
+            itemSelector: '.grid-item',
+            columnWidth: 200
+        });
     }
 
     componentWillReceiveProps(newProps){
@@ -79,10 +84,11 @@ class BoardContainer extends React.Component{
         return(
             <div id="board-container">
                 <b>Board</b>                
-                <button className="btn button right" onClick={this._newPostClicked.bind(this) } >New Post</button>
-
                 {this.props.user && 
+                <div>
+                    <button className="btn button right" onClick={this._newPostClicked.bind(this) } >New Post</button>
                     <div>Logged in Username: {this.props.user.username}</div>
+                </div>
                 }
                 
                 {this.props.filterUser &&
@@ -90,12 +96,12 @@ class BoardContainer extends React.Component{
                 }
 
                 {(this.state.posts.length > 0) && 
-                <div className="row">
+                <div className="grid">
                     {this.state.posts.map((post, i )=>{
                         return( 
-                                <div key={i} className="col s3">
-                                    <PostCard  post={post} user={this.props.user} />
-                                </div>
+                                
+                                    <PostCard key={i} post={post} user={this.props.user} />
+                                
                         )
                     })}
                 </div>
