@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
+import Masonry from 'react-masonry-component';
 
 //Modals
 import NewPostModal     from "./../Modals/NewPostModal.jsx";
@@ -21,9 +22,13 @@ class BoardContainer extends React.Component{
         this.state = {
             user:       this.props.user,
             filterUser: this.props.filterUser,
-            posts:      []
+            posts:      [],
+            postCardArray: [],
+            masonryOptions: {
+                transitionDuration: 0
+            }
         }
-        this.masonry = this._masonry.bind(this);
+
     };
 
     componentWillMount(){
@@ -47,19 +52,7 @@ class BoardContainer extends React.Component{
         
     }
 
-    _masonry(){
-        var elem = document.querySelector('.grid');
-        console.log(elem);
-        var msnry = new Masonry( elem, {
-            // options
-            itemSelector: '.grid-item',
-            columnWidth: 200,
-            transitionDuration: 1,
-            disableImagesLoaded:false,
-            updateOnEachImageLoad:true
-        });
-        console.log(msnry);
-    }
+
 
 
     _newPostClicked(){
@@ -86,7 +79,11 @@ class BoardContainer extends React.Component{
                 console.log("Success");
                 //_this._getUser();
                 console.log(_this.state.posts);
-                _this.masonry();
+
+
+
+
+
             },
             dataType: "text",
             contentType : "application/json"
@@ -101,30 +98,32 @@ class BoardContainer extends React.Component{
         return(
             <div id="board-container">
                 <b>Board</b>                
-                {this.props.user && 
+                {(this.props.user && (this.props.user.username != null)) && 
                 <div>
                     <button className="btn button right" onClick={this._newPostClicked.bind(this) } >New Post</button>
+                    <NewPostModal user={this.props.user} />
+
                     <div>Logged in Username: {this.props.user.username}</div>
                 </div>
                 }
                 
-                {this.props.filterUser &&
+                {(this.props.filterUser && (this.props.filterUser.username != null)) &&
                     <div>Board Owner: {this.props.filterUser.username}</div>
                 }
 
+
+
+
                 {(this.state.posts.length > 0) && 
-                <div className="grid js-masonry" >
-                    {this.state.posts.map((post, i )=>{
-                        return( 
-                                
-                                    <PostCard key={i} post={post} user={this.props.user} />
-                                
+                <div className="masonry" >
+                    {this.state.posts.map( (post, i) => {
+                        return(
+                            <PostCard key={i} post={post} user={this.props.user} />
                         )
                     })}
                 </div>
                 }
 
-                <NewPostModal user={this.props.user} />
                 <br />
 
             </div>

@@ -11,17 +11,54 @@ nav{
   border-radius: 1em;
 }
 
-  .grid-item { 
-      width: 200px;
-      border: 2px solid black;
-  }
+.btn{
+    background-color: hsl(190, 50%, 50%);    
+}
+.btn:hover{
+    background-color: hsl(190, 55%, 55%);
+}
+
+.wrapper {
+    width: 95%;
+    margin: 3em auto;
+}
+
+.masonry {
+    margin: 1.5em 0;
+    padding: 0;
+    -moz-column-gap: 1.5em;
+    -webkit-column-gap: 1.5em;
+    column-gap: 1.5em;
+    font-size: .85em;
+}
+
+.item {
+    display: inline-block;
+    background: #fff;
 
 
-  .grid-item2 { 
-      width: 200px;
-      border: 2px solid black;
-  }
+    width: 100%;
+}
 
-  .grid-item--width2 { width: 400px; }
+@media only screen and (min-width: 400px) {
+    .masonry {
+        column-count: 2;
+    }
+}
 
-  
+@media only screen and (min-width: 700px) {
+    .masonry {
+        column-count: 3;
+    }
+}
+
+
+
+@media only screen and (min-width: 900px) {
+    .wrapper {
+        width: 900px;
+    }
+    .masonry {
+        column-count: 4;
+    }
+}

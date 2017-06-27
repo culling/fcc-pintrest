@@ -10,7 +10,8 @@ class PrimaryNavbar extends React.Component{
             containerIds:[
                 "#home-container",
                 "#profile-container",
-                "#myBoard-container"
+                "#myBoard-container",
+                "#allBoard-container"
             ],
             activeContainerId: "initial"
         }
@@ -63,6 +64,12 @@ class PrimaryNavbar extends React.Component{
         this._showContainer("#myBoard-container");
     }
 
+    _allBoardClicked(){
+        console.log("My Board Clicked");
+        this._showContainer("#allBoard-container");
+    }
+
+
     render(){
         return(
             <div>
@@ -73,6 +80,7 @@ class PrimaryNavbar extends React.Component{
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
                             <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>                            
                             <li  onClick={ this._myBoardClicked.bind(this)}><a >My Board</a></li>
+                            <li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>
 
                             <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter">Log In</a></li>
                             <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>
@@ -81,6 +89,9 @@ class PrimaryNavbar extends React.Component{
                         <ul className="side-nav" id="mobile-menu">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
                             <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>
+                            <li  onClick={ this._myBoardClicked.bind(this)}><a >My Board</a></li>
+                            <li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>
+
                             <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter" >Log In</a></li>
                             <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>
 
