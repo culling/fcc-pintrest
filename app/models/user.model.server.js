@@ -29,8 +29,8 @@ var UserSchema = new Schema({
     displayName         : String,
     profileImageUrl     : String,
     email               : String,
-
-    messages            : Array
+    messages            : Array,
+    wallPosts           : [{type: Schema.Types.ObjectId, ref: "Post" }]
 });
 
 

@@ -68,7 +68,7 @@ class BoardContainer extends React.Component{
         }else{
             user.type="other"
         }
-        console.log(user);
+        //console.log(user);
 
         jQuery.ajax({
             type: "GET",
@@ -76,13 +76,9 @@ class BoardContainer extends React.Component{
             success: function(rawPosts){
                 var posts= JSON.parse(rawPosts);
                 _this.setState({posts: posts})
-                console.log("Success");
+                //console.log("Success");
                 //_this._getUser();
-                console.log(_this.state.posts);
-
-
-
-
+                //console.log(_this.state.posts);
 
             },
             dataType: "text",

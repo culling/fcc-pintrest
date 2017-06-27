@@ -29,7 +29,8 @@ var PostSchema = new Schema({
     likes       : Array,
     favorites   : Array,
     comments    : Array,
-    owner       : {type: Schema.Types.ObjectId, ref: "User" }
+    owner       : {type: Schema.Types.ObjectId, ref: "User" },
+    date        : Date
 });
 
 

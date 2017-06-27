@@ -19,6 +19,7 @@ function clean(obj){
 
 exports.findAll = function (done){
     PostModel.find()
+        .sort({date: "descending"})
         .populate("owner")
         .exec(function(err, foundPosts){
             if(err){ console.error(err)};
@@ -39,6 +40,7 @@ exports.getPostByUsername = function(username, done){
 
 exports.create = function(newPost, done){
     var post = new PostModel(newPost);
+    post.date = new Date;
     post.save();
 }
 
