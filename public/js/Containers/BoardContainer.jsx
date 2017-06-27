@@ -20,6 +20,7 @@ class BoardContainer extends React.Component{
             filterUser: this.props.filterUser,
             posts:      []
         }
+        this.masonry = this._masonry.bind(this);
     };
 
     componentWillMount(){
@@ -28,11 +29,7 @@ class BoardContainer extends React.Component{
             //this.setState(newState);
         }.bind(this));
         this._getPosts(this.props.filterUser || this.props.user);
-        jQuery('.grid').masonry({
-            // options
-            itemSelector: '.grid-item',
-            columnWidth: 200
-        });
+
     }
 
     componentWillReceiveProps(newProps){
@@ -44,8 +41,23 @@ class BoardContainer extends React.Component{
             console.log(newProps.user);
             this.setState({user: newProps.user});
         }
-
+        
     }
+
+    _masonry(){
+        var elem = document.querySelector('.grid');
+        console.log(elem);
+        var msnry = new Masonry( elem, {
+            // options
+            itemSelector: '.grid-item',
+            columnWidth: 200,
+            transitionDuration: 1,
+            disableImagesLoaded:false,
+            updateOnEachImageLoad:true
+        });
+        console.log(msnry);
+    }
+
 
     _newPostClicked(){
         jQuery('#new-post-modal').modal('open');
@@ -71,6 +83,7 @@ class BoardContainer extends React.Component{
                 console.log("Success");
                 //_this._getUser();
                 console.log(_this.state.posts);
+                _this.masonry();
             },
             dataType: "text",
             contentType : "application/json"
@@ -81,6 +94,7 @@ class BoardContainer extends React.Component{
     }
 
     render(){
+        
         return(
             <div id="board-container">
                 <b>Board</b>                
@@ -96,7 +110,7 @@ class BoardContainer extends React.Component{
                 }
 
                 {(this.state.posts.length > 0) && 
-                <div className="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+                <div className="grid js-masonry" >
                     {this.state.posts.map((post, i )=>{
                         return( 
                                 
@@ -106,7 +120,6 @@ class BoardContainer extends React.Component{
                     })}
                 </div>
                 }
-
 
                 <NewPostModal user={this.props.user} />
                 <br />

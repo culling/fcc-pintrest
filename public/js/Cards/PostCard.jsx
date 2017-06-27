@@ -25,7 +25,7 @@ class PostCard extends React.Component{
             <div className="grid-item ">
                 <article className="card ">
                     <div className="card-image">
-                        <img src={this.props.post.refUrl} onError={this._imgError } className="img-responsive" alt={this.props.post.postHeading} />
+                        <img src={this.props.post.refUrl} onError={this._imgError } className="img-fluid" alt={this.props.post.postHeading} />
                     </div>
                     <div className="card-stacked">
                         <div className="card-content">

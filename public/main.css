@@ -11,4 +11,17 @@ nav{
   border-radius: 1em;
 }
 
-.grid-item { width: 200px; }
+  .grid-item { 
+      width: 200px;
+      border: 2px solid black;
+  }
+
+
+  .grid-item2 { 
+      width: 200px;
+      border: 2px solid black;
+  }
+
+  .grid-item--width2 { width: 400px; }
+
+  
