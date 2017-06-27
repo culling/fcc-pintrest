@@ -1,6 +1,9 @@
 // References and useful pages
 //https://stackoverflow.com/questions/41216948/this-setstate-is-not-a-function-when-trying-to-save-response-on-state
 
+
+//https://www.npmjs.com/package/react-masonry-component
+
 import React from 'react';
 import {render} from 'react-dom';
 
