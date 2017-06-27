@@ -18,6 +18,8 @@ nav{
     background-color: hsl(190, 55%, 55%);
 }
 
+
+/*/http://w3bits.com/css-masonry/*/
 .wrapper {
     width: 95%;
     margin: 3em auto;
@@ -51,8 +53,6 @@ nav{
         column-count: 3;
     }
 }
-
-
 
 @media only screen and (min-width: 900px) {
     .wrapper {

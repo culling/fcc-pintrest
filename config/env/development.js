@@ -5,5 +5,6 @@ module.exports = {
     mongoServer:        "localhost",
     pageTitle:          "Free Code Camp - Pintrest Clone",
     mongoUrl:           `mongodb://localhost:27017/mydb` || process.env.MONGODB_URI,
-    publicHostname:     "localhost"
+    publicHostname:     "localhost",
+    publicUrl:          "localhost:80"
 };

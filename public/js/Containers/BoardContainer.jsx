@@ -100,9 +100,12 @@ class BoardContainer extends React.Component{
                 <b>Board</b>                
                 {(this.props.user && (this.props.user.username != null)) && 
                 <div>
-                    <button className="btn button right" onClick={this._newPostClicked.bind(this) } >New Post</button>
-                    <NewPostModal user={this.props.user} />
-
+                    {(this.props.filterUser && (this.props.filterUser.username != null)) &&
+                    <div>
+                        <button className="btn button right" onClick={this._newPostClicked.bind(this) } >New Post</button>
+                        <NewPostModal user={this.props.user} />
+                    </div>
+                    }
                     <div>Logged in Username: {this.props.user.username}</div>
                 </div>
                 }

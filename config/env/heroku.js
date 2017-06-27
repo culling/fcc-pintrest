@@ -3,5 +3,6 @@ module.exports={
     mongoPort:          37882,
     pageTitle:          "Free Code Camp - Pintrest Clone",
     mongoUrl:           process.env.MONGODB_URI,
-    publicHostname:     "culling-fcc-pintrest.herokuapp.com"
+    publicHostname:     "culling-fcc-pintrest.herokuapp.com",
+    publicUrl:          "culling-fcc-pintrest.herokuapp.com"
 }
