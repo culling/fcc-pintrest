@@ -96,7 +96,7 @@ class BoardContainer extends React.Component{
                 }
 
                 {(this.state.posts.length > 0) && 
-                <div className="grid">
+                <div className="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
                     {this.state.posts.map((post, i )=>{
                         return( 
                                 
