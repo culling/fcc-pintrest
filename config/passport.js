@@ -13,7 +13,7 @@ var User      = mongo.users.UserModel;
 passport.use(new Strategy({
     consumerKey: process.env.CONSUMER_KEY,
     consumerSecret: process.env.CONSUMER_SECRET,
-    callbackURL: `http://localhost:${config.port}/login/twitter/return`
+    callbackURL: `http://${config.publicHostname}:${config.port}/login/twitter/return`
   },
   function(token, tokenSecret, profile, cb) {
     User.findOneAndUpdate({ twitterId: profile.id },profile, {upsert: true}, function (err, user) {
