@@ -73,7 +73,7 @@ class PostCard extends React.Component{
             dataType: "text",
             contentType : "application/json",
             success: function(response){
-                console.log(response);
+                //console.log(response);
                 console.log("Success");
                 //_this._getUser();
                 _this._sendUserMessage(userMessage);
