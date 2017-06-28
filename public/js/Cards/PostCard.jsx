@@ -64,7 +64,9 @@ class PostCard extends React.Component{
                                 {/*<a href="#" onClick={()=>{ console.log("Favorited!")}       } ><i className="fa fa-star-o"></i></a>*/}
                                 {/*<a href="#" onClick={()=>{ console.log("Comment!")}         } ><i className="fa fa-comment"></i></a>*/}
                                 {/*<a href="#" onClick={()=>{ console.log("Share!")}           } ><i className="fa fa-twitter"></i></a>*/}
+                                {(this.props.user && this.props.user.username) &&
                                 <a href="#" onClick={()=>{ this._addToWallClicked(this.props.post) }  } ><i className="fa fa-thumb-tack"></i></a>
+                                }
                             </div>
                     </div>
                 </article>

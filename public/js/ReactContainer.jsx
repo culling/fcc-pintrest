@@ -67,7 +67,7 @@ class ReactContainer extends React.Component{
             <div>
                 <header>
                 <b>My Pintrest Clone</b>
-                <PrimaryNavbar />
+                <PrimaryNavbar user={this.state.user} />
                     {this.state.user &&
                         <div>
                             <b>Current User {this.state.user.displayName}</b>

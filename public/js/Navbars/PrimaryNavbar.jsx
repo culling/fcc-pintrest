@@ -78,22 +78,22 @@ class PrimaryNavbar extends React.Component{
                         <a href="#" data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
-                            <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>                            
-                            <li  onClick={ this._myBoardClicked.bind(this)}><a >My Board</a></li>
+                            {(this.props.user && this.props.user.username) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>  }
+                            {(this.props.user && this.props.user.username) && <li  onClick={ this._myBoardClicked.bind(this)}><a >My Board</a></li> }
                             <li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>
 
-                            <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter">Log In</a></li>
-                            <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>
+                            {( (this.props.user == undefined) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter" >Log In</a></li>}
+                            {(this.props.user && this.props.user.username) && <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>}
 
                         </ul>
                         <ul className="side-nav" id="mobile-menu">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
-                            <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>
-                            <li  onClick={ this._myBoardClicked.bind(this)}><a >My Board</a></li>
+                            {(this.props.user && this.props.user.username) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>  }
+                            {(this.props.user && this.props.user.username) && <li  onClick={ this._myBoardClicked.bind(this)}><a >My Board</a></li> }
                             <li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>
 
-                            <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter" >Log In</a></li>
-                            <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>
+                            {( (this.props.user == undefined) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter" >Log In</a></li>}
+                            {(this.props.user && this.props.user.username) && <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>}
 
                         </ul>
                     </div>
