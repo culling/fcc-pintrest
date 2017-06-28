@@ -144,7 +144,7 @@ class BoardContainer extends React.Component{
         
         return(
             <div id="board-container">
-                <b>Board</b>                
+                {/*<b>Board</b>*/}
                 {(this.props.user && (this.props.user.username != null)) && 
                 <div>
                     {(this.props.filterUser && (this.props.filterUser.username != null)) &&
@@ -154,12 +154,12 @@ class BoardContainer extends React.Component{
                         <NewPostModal user={this.props.user} />
                     </div>
                     }
-                    <div>Logged in Username: {this.props.user.username}</div>
+                    {/*<div>Logged in Username: {this.props.user.username}</div>*/}
                 </div>
                 }
                 
-                {(this.props.filterUser && (this.props.filterUser.username != null)) &&
-                    <div>Board Owner: {this.props.filterUser.username}</div>
+                {(this.state.filterUser && (this.state.filterUser.username != null)) &&
+                    <div>Board Owner: {this.state.filterUser.username}</div>
                 }
 
 
