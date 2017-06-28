@@ -30,7 +30,10 @@ exports.drop = function(done){
 
 exports.getUserByUsername = function(username, done){
     UserModel.findOne({"username":username}, {"password": 0, "salt":0}, function(err, user){
-        if(err){console.error(err)};
-        done(user);
+        if(err){
+            console.error(err);
+            done(err, null);
+        };
+        done(null, user);
     });
 }

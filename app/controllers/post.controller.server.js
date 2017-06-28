@@ -5,8 +5,15 @@ var https = require("https");
 var config      = require("./../../config/config");
 var mongoExport = require("./../../config/mongo");
 
+//Other Controllers
+var Users       = require("./user.controller.server");
+
+
+//Model
 var PostModel   = mongoExport.posts.PostModel;
 var Posts       = mongoExport.posts;
+
+
 
 function clean(obj){
     for (var propName in obj){
@@ -33,15 +40,25 @@ exports.drop = function(done){
 
 exports.getPostByUsername = function(username, done){
     console.log(username);
-    PostModel.find()
-        .sort({date: "descending"})
-        .populate({path:"owner", match:{"username":username}})
-        .exec(
-        function(err, post){
-            if(err){console.error(err)};
-            console.log(post)
-            done(post);
+
+    Users.getUserByUsername(username, function(err, user){
+        console.log(user);
+        if(err){return done(null)};
+        if((user == null )|| (user.id == null)  ){return done(null)};
+        
+        PostModel.find()
+            .sort({date: "descending"})
+            .populate("owner")
+            .where( {"owner": user._id} )
+            .exec(
+            function(err, post){
+                if(err){console.error(err)};
+                //console.log(post);
+                done(post);
+        });
     });
+        
+
 }
 
 exports.create = function(newPost, done){
