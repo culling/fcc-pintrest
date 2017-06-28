@@ -32,9 +32,15 @@ exports.drop = function(done){
 }
 
 exports.getPostByUsername = function(username, done){
-    PostModel.find({"owner":username},  function(err, post){
-        if(err){console.error(err)};
-        done(post);
+    console.log(username);
+    PostModel.find()
+        .sort({date: "descending"})
+        .populate({path:"owner", match:{"username":username}})
+        .exec(
+        function(err, post){
+            if(err){console.error(err)};
+            console.log(post)
+            done(post);
     });
 }
 
@@ -42,5 +48,6 @@ exports.create = function(newPost, done){
     var post = new PostModel(newPost);
     post.date = new Date;
     post.save();
+    done();
 }
 

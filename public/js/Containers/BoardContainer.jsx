@@ -28,16 +28,15 @@ class BoardContainer extends React.Component{
                 transitionDuration: 0
             }
         }
-
     };
 
     componentWillMount(){
         socket.on('new state', function(newState) {
             console.log("new state found");
             //this.setState(newState);
+            this._getPosts(this.state.user, this.state.filterUser);
         }.bind(this));
         this._getPosts(this.props.filterUser || this.props.user);
-
     }
 
     componentWillReceiveProps(newProps){

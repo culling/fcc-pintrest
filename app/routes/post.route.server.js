@@ -22,6 +22,17 @@ function clean(obj){
     }
 }
 
+router.get("/:username", function(req, res){
+    console.log(req.params.username);
+    
+    posts.getPostByUsername(req.params.username, function(posts){
+        res.write(JSON.stringify(posts, null, "\t") );
+        res.end();
+    })
+    
+});
+
+
 router.get("/", function(req, res){
     posts.findAll(function(posts){
         res.write(JSON.stringify(posts, null, "\t") );
@@ -35,7 +46,10 @@ router.post("/", function(req, res){
     //newPost.owner = req.user;
     console.log(newPost);
     posts.create(newPost,function(response){
-        console.log(response);
+        res.write("success");
+        //rew.write(JSON.stringify(response, null, "\t") );
+        res.end();
+        //console.log(response);
     });
 });
 
