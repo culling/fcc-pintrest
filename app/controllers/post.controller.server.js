@@ -68,3 +68,15 @@ exports.create = function(newPost, done){
     done();
 }
 
+exports.delete = function(post, done){
+    console.log("Delete Called on controller - post.controller.server.js");
+    
+    PostModel.findOneAndRemove({_id:post._id},function(err, result){
+        if(err){
+            console.error(err);
+            return (err, null);
+        }
+
+        done(null, result)});
+
+}

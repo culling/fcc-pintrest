@@ -17,23 +17,36 @@ class ReactContainer extends React.Component{
 
     constructor(props){
         super(props);
-
         this.state = {
-            activeContainer: "#home-panel"
+            activeContainer: "#allBoard-container",
+            containerIds:[
+                "#home-container",
+                "#profile-container",
+                "#myBoard-container",
+                "#allBoard-container"
+            ]
+
         }
         //Binding to this for functions
-
+        this._setActiveContainer = this._setActiveContainer.bind(this);
     };
 
     componentWillMount(){
-        socket.on('new state', function(newState) {
-            console.log("new state found");
-            //this.setState(newState);
-        }.bind(this));
         this._getUser.bind(this);
         this._getUser();
         this._getTwitterUser.bind(this);
         this._getTwitterUser();
+    }
+
+    componentDidMount(){
+        socket.on('new state', function(newState) {
+            console.log("new state found");
+            //this.setState(newState);
+        }.bind(this));
+    }
+
+    componentWillUnmount(){
+        socket.removeListener('new state');
     }
 
     _getUser(){
@@ -61,28 +74,56 @@ class ReactContainer extends React.Component{
         });
     };
 
+    _setActiveContainer(newActiveContainerId){
+        console.log("Active Container ID changed");
+        //console.log(newActiveContainerId);
+
+        /*
+        this.state.containerIds.filter(containerId =>{
+                return containerId !== newActiveContainerId
+            }).map(containerId =>{
+                jQuery(containerId)
+                    .attr("class", "div-hidden");
+            });
+        */
+        //Show active container
+        jQuery(newActiveContainerId)
+            .attr("class", "div-visible");
+        
+        this.setState({activeContainer: newActiveContainerId});
+        //console.log(this.state.activeContainer);
+    }
+
+
     render(){
         return(
 
             <div>
                 <header>
                 <b>My Pintrest Clone</b>
-                <PrimaryNavbar user={this.state.user} />
+                <PrimaryNavbar user={this.state.user} setActiveContainer={  this._setActiveContainer.bind(this) } />
                     {this.state.user &&
                         <div>
                             <b>Current User {this.state.user.displayName}</b>
                         </div>
                     }
                 </header>
-
+                    {(this.state.activeContainer === "#home-container")&&
                     <HomeContainer          user={this.state.user} twitterUser={this.state.twitterUser} />
+                    }
+                    {(this.state.activeContainer === "#profile-container")&&
                     <ProfileContainer       user={this.state.user} twitterUser={this.state.twitterUser} />
-                    <div id="myBoard-container" className="div-hidden">
+                    }
+                    {(this.state.activeContainer === "#myBoard-container")&&
+                    <div id="myBoard-container" >
                         <BoardContainer     user={this.state.user} filterUser={this.state.user} />
                     </div>
-                    <div id="allBoard-container" className="div-hidden">
+                    }
+                    {(this.state.activeContainer === "#allBoard-container")&&
+                    <div id="allBoard-container" >
                         <BoardContainer     user={this.state.user}  filterUser={{username:null, type:"all"}}/>
                     </div>
+                    }
 
 
             </div>

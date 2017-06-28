@@ -97,13 +97,13 @@ class NewPostModal extends React.Component{
 
                         <div className="input-field">
                             <i className="material-icons prefix">mode_edit</i>
-                            <input type="text" name="postHeading" id="postHeading" />
+                            <input type="text" name="postHeading" id="postHeading" required />
                             <label htmlFor="postHeading" >Title </label>
                         </div>
                         <div className="input-field">
                             <i className="material-icons prefix">web</i>
-                            <input type="text" name="refUrl" id="refUrl" />
-                            <label htmlFor="refUrl" >URL: </label>
+                            <input type="url" name="refUrl" id="refUrl" required className="validate" pattern="https?://.+(\.jpg|\.png|.\SVG|.\gif)"  />
+                            <label htmlFor="refUrl" >Image URL: </label>
                         </div>
 
                 </div>

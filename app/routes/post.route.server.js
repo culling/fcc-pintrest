@@ -53,6 +53,23 @@ router.post("/", function(req, res){
     });
 });
 
+router.delete("/", function(req, res){
+    console.log("hit - DELETE - /api/post ");
+    var post = req.body;
+    //newPost.owner = req.user;
+    //console.log(post);
+    posts.delete(post,function(err, response){
+        if(err){
+            console.error(err);
+            res.write("error");
+        }
+        res.write("deleted");
+        //rew.write(JSON.stringify(response, null, "\t") );
+        res.end();
+        //console.log(response);
+    });
+});
+
 
 router.get("/drop", function(req, res){
     posts.drop(function(){

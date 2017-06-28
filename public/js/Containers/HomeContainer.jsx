@@ -19,6 +19,9 @@ class HomeContainer extends React.Component{
 
     componentWillMount(){
 
+   }
+
+   componentDidMount(){   
         socket.on('new state', function(newState) {
             console.log("new state found");
             //this.setState(newState);
@@ -26,7 +29,9 @@ class HomeContainer extends React.Component{
         }.bind(this));
    }
 
- 
+   componentWillUnmount(){
+        socket.removeListener('new state');
+   }
 
     render(){
         return(

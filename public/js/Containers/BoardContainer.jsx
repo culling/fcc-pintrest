@@ -31,20 +31,31 @@ class BoardContainer extends React.Component{
     };
 
     componentWillMount(){
+        this._getPosts(this.props.user, this.props.filterUser);
+        this._ownerClicked = this._ownerClicked.bind(this);
+    }
+
+    componentDidMount(){
         socket.on('new state', function(newState) {
             console.log("new state found");
             //this.setState(newState);
             this._getPosts(this.state.user, this.state.filterUser);
         }.bind(this));
-        this._getPosts(this.props.filterUser || this.props.user);
     }
 
+    componentWillUnmount(){
+        socket.removeListener('new state');
+    }
+
+
     componentWillReceiveProps(newProps){
+        
         if (this.props.filterUser != newProps.filterUser){
 
             this.setState({filterUser: newProps.filterUser});
             this._getPosts(newProps.user, newProps.filterUser);
         }
+        
         if (this.props.user != newProps.user){
             console.log(newProps.user);
             this.setState({user: newProps.user});
@@ -69,22 +80,37 @@ class BoardContainer extends React.Component{
         }else{
             user.type="other"
         }
-        //console.log(user);
 
+
+
+        jQuery.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results==null){
+            return null;
+            }
+            else{
+            return decodeURI(results[1]) || 0;
+            }
+        }
+
+        var username = jQuery.urlParam('username') || "";
+        
         jQuery.ajax({
             type: "GET",
-            url: "api/post",
+            url: "api/post/" + username ,
             success: function(rawPosts){
                 var postsUnfiltered = JSON.parse(rawPosts);
                 var posts = postsUnfiltered.filter(post => {
                     //console.log(post.owner);
-                    console.log(filterUser)
+                    //console.log(filterUser)
                     var owner = post.owner;
                     
-                    if(owner && owner.username && (post.owner.username === filterUser.username) ){
+                    if(owner && owner.username &&
+                        filterUser &&
+                        filterUser.username && (post.owner.username === filterUser.username) ){
                         return true;
                     }
-                    return (filterUser.type == "all");
+                    return (filterUser && filterUser.type && (filterUser.type == "all"));
                     
                 
                 })
@@ -97,11 +123,22 @@ class BoardContainer extends React.Component{
             },
             dataType: "text",
             contentType : "application/json"
-        });        
-
-
+        });
 
     }
+
+
+    _ownerClicked(filterUser){
+        console.log("User Clicked!");
+        console.log("User");
+        console.log(filterUser);
+
+        this.setState({filterUser: filterUser});
+        this._getPosts(this.state.user, filterUser);
+
+    }
+
+
 
     render(){
         
@@ -111,6 +148,7 @@ class BoardContainer extends React.Component{
                 {(this.props.user && (this.props.user.username != null)) && 
                 <div>
                     {(this.props.filterUser && (this.props.filterUser.username != null)) &&
+
                     <div>
                         <button className="btn button right" onClick={this._newPostClicked.bind(this) } >New Post</button>
                         <NewPostModal user={this.props.user} />
@@ -131,7 +169,7 @@ class BoardContainer extends React.Component{
                 <div className="masonry" >
                     {this.state.posts.map( (post, i) => {
                         return(
-                            <PostCard key={i} post={post} user={this.props.user} />
+                            <PostCard key={i} post={post} user={this.props.user} ownerClicked={  this._ownerClicked } />
                         )
                     })}
                 </div>

@@ -57,8 +57,30 @@ class PostCard extends React.Component{
         console.log("User Clicked!");
         console.log("User");
         console.log(user);
+    }
 
+    _deleteClicked(postObject){
+        console.log("Delete Clicked");
+        //console.log(postObject);
+        var _this = this;
+        var userMessage = {user:  this.props.user,
+            message: "Post deleted"
+        };
         
+        jQuery.ajax({
+            type: "DELETE",
+            url: "api/post",
+            data: JSON.stringify(postObject ),
+            dataType: "text",
+            contentType : "application/json",
+            success: function(response){
+                //console.log(response);
+                console.log("Deleted");
+                //_this._getUser();
+                _this._sendUserMessage(userMessage);
+            }
+
+        });
 
     }
 
@@ -104,18 +126,19 @@ class PostCard extends React.Component{
                             <div className="card-content">
                                 <div><a href={this.props.post.refUrl}><b>{this.props.post.postHeading}</b></a></div>
                                 {this.props.post.owner &&
-                                <b><a className="owner" href="#" onClick={()=> this._ownerClicked(this.props.post.owner)}> {this.props.post.owner.displayName || "Holy Ghost"}</a></b>
+                                <b><a className="owner" href="#" onClick={()=> this.props.ownerClicked(this.props.post.owner)}> {this.props.post.owner.displayName || "Holy Ghost"}</a></b>
                                 }
                             </div>
                         </div>
 
                             <div className="card-action">
-                                {/*<a href="#" onClick={()=>{ console.log("Star")}           } ><i className="fa fa-star-o"></i></a>*/}
-                                {/*<a href="#" onClick={()=>{ console.log("Favorited!")}       } ><i className="fa fa-star-o"></i></a>*/}
-                                {/*<a href="#" onClick={()=>{ console.log("Comment!")}         } ><i className="fa fa-comment"></i></a>*/}
-                                {/*<a href="#" onClick={()=>{ console.log("Share!")}           } ><i className="fa fa-twitter"></i></a>*/}
                                 {(this.props.user && this.props.user.username) &&
-                                <a href="#" onClick={()=>{ this._addToWallClicked(this.props.post) }  } ><i className="fa fa-thumb-tack"></i></a>
+                                    <div className="card-actions-enabled">
+                                        <a href="#" onClick={()=>{ this._addToWallClicked(this.props.post) }  } ><i className="fa fa-thumb-tack"></i></a>
+                                        {(this.props.post.owner && (this.props.user.username == this.props.post.owner.username)) &&
+                                            <a href="#" onClick={()=>{ this._deleteClicked(this.props.post) }  } ><i className="fa fa-trash-o"></i></a>
+                                        }
+                                    </div>
                                 }
                             </div>
                     </div>

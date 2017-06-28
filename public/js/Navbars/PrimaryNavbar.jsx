@@ -7,12 +7,6 @@ class PrimaryNavbar extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            containerIds:[
-                "#home-container",
-                "#profile-container",
-                "#myBoard-container",
-                "#allBoard-container"
-            ],
             activeContainerId: "initial"
         }
     }
@@ -21,27 +15,17 @@ class PrimaryNavbar extends React.Component{
         jQuery( document ).ready(function(){
             jQuery(".button-collapse").sideNav();
         });
-        this._showContainer("#home-container");
+        //this._showContainer("#home-container");
     }
 
     _showContainer(newActiveContainerId){
-        if(this.state.activeContainerId != newActiveContainerId){
-            this.setState({activeContainerId: newActiveContainerId});
-            this.state.containerIds.filter(containerId =>{
-                return containerId !== newActiveContainerId
-            }).map(containerId =>{
-                jQuery(containerId)
-                    .attr("class", "div-hidden");
-            });
-        //Show active container
-        jQuery(newActiveContainerId)
-            .attr("class", "div-visible");
-        }
+            this.props.setActiveContainer(newActiveContainerId);
     }
 
     _homeClicked(){
         console.log("Home Clicked");
-        this._showContainer("#home-container");        
+        //this._showContainer("#home-container");
+        this._showContainer("#allBoard-container");
     }
 
 
@@ -78,9 +62,9 @@ class PrimaryNavbar extends React.Component{
                         <a href="#" data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
-                            {(this.props.user && this.props.user.username) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>  }
+                            {/*(this.props.user && this.props.user.username) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>  */}
                             {(this.props.user && this.props.user.username) && <li  onClick={ this._myBoardClicked.bind(this)}><a >My Board</a></li> }
-                            <li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>
+                            {/*<li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>*/}
 
                             {( (this.props.user == undefined) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter" >Log In</a></li>}
                             {(this.props.user && this.props.user.username) && <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>}
@@ -88,9 +72,9 @@ class PrimaryNavbar extends React.Component{
                         </ul>
                         <ul className="side-nav" id="mobile-menu">
                             <li  onClick={ this._homeClicked.bind(this)}><a >Home</a></li>
-                            {(this.props.user && this.props.user.username) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>  }
+                            {/*(this.props.user && this.props.user.username) && <li  onClick={ this._profileClicked.bind(this)}><a >Profile</a></li>  */}
                             {(this.props.user && this.props.user.username) && <li  onClick={ this._myBoardClicked.bind(this)}><a >My Board</a></li> }
-                            <li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>
+                            {/*<li  onClick={ this._allBoardClicked.bind(this)}><a >All Board</a></li>*/}
 
                             {( (this.props.user == undefined) ) && <li  onClick={ this._loginClicked.bind(this)}><a href="/login/twitter" >Log In</a></li>}
                             {(this.props.user && this.props.user.username) && <li  onClick={ this._logoutClicked.bind(this)}><a href="/logout">Log Out</a></li>}
