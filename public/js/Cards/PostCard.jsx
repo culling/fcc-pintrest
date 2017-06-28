@@ -53,6 +53,15 @@ class PostCard extends React.Component{
         event.target.error = "";
     }
 
+    _ownerClicked(user){
+        console.log("User Clicked!");
+        console.log("User");
+        console.log(user);
+
+        
+
+    }
+
     _addToWallClicked(post){
         console.log("Add to wall Clicked");
         //console.log(post);
@@ -95,7 +104,7 @@ class PostCard extends React.Component{
                             <div className="card-content">
                                 <div><a href={this.props.post.refUrl}><b>{this.props.post.postHeading}</b></a></div>
                                 {this.props.post.owner &&
-                                <b> {this.props.post.owner.displayName || "Holy Ghost"}</b>
+                                <b><a className="owner" href="#" onClick={()=> this._ownerClicked(this.props.post.owner)}> {this.props.post.owner.displayName || "Holy Ghost"}</a></b>
                                 }
                             </div>
                         </div>
