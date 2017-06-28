@@ -32,7 +32,8 @@ router.get("/twitter/user", function(req, res){
 
 router.get("/user", function(req, res){
     var currentUser = req.user || {};
-    users.getUserByUsername(currentUser.username, function(userFromDB){
+    users.getUserByUsername(currentUser.username, function(err, userFromDB){
+        if(err)console.error(err);
         res.write(JSON.stringify(userFromDB, null, "\t")  );
         res.end();
     });
