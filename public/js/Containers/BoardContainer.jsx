@@ -44,10 +44,12 @@ class BoardContainer extends React.Component{
         if (this.props.filterUser != newProps.filterUser){
 
             this.setState({filterUser: newProps.filterUser});
+            this._getPosts(newProps.user, newProps.filterUser);
         }
         if (this.props.user != newProps.user){
             console.log(newProps.user);
             this.setState({user: newProps.user});
+            this._getPosts(newProps.user, newProps.filterUser);
         }
         
     }
@@ -59,7 +61,7 @@ class BoardContainer extends React.Component{
         jQuery('#new-post-modal').modal('open');
     }
 
-    _getPosts(user){
+    _getPosts(user, filterUser){
         var _this = this;
         if(!user){user = {}}
         var userObject = Object.assign(user);
@@ -74,7 +76,20 @@ class BoardContainer extends React.Component{
             type: "GET",
             url: "api/post",
             success: function(rawPosts){
-                var posts= JSON.parse(rawPosts);
+                var postsUnfiltered = JSON.parse(rawPosts);
+                var posts = postsUnfiltered.filter(post => {
+                    //console.log(post.owner);
+                    console.log(filterUser)
+                    var owner = post.owner;
+                    
+                    if(owner && owner.username && (post.owner.username === filterUser.username) ){
+                        return true;
+                    }
+                    return (filterUser.type == "all");
+                    
+                
+                })
+
                 _this.setState({posts: posts})
                 //console.log("Success");
                 //_this._getUser();
