@@ -33,6 +33,10 @@ class NewPostModal extends React.Component{
         var formDataSerializedArray = jQuery("#newPostForm").serializeArray();
         var formDataObject = this._objectifyForm(formDataSerializedArray);
         formDataObject.owner = this.props.user._id;
+        jQuery("#postHeading")
+                .add("#refUrl")
+                .val("");
+
         console.log(JSON.stringify( formDataObject ));
         jQuery.ajax({
             type: "POST",
@@ -41,6 +45,7 @@ class NewPostModal extends React.Component{
             success: function(){
                 console.log("Success");
                 //_this._getUser();
+
             },
             dataType: "text",
             contentType : "application/json"
