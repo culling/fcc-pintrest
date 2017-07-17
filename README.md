@@ -1,10 +1,14 @@
-# projectEval
+# fcc-pintrest
 Free Code Camp - Build a Pinterest Clone
 
-(docs/screenshot-01.png)
+![fcc-Pintrest on GitHub](docs/screenshot-01.png)
 
-## Purpose of Build a Pinterest Clone 
-Here are the specific user stories you should implement for this project:
+## Purpose - Build a Pinterest Clone 
+Refence URL
+https://www.freecodecamp.org/challenges/build-a-pinterest-clone
+
+
+##Here are the specific user stories you should implement for this project
 
 User Story: As an unauthenticated user, I can login with Twitter.
 
